@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bouw je CV</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body class="bg-slate-950 text-white">
+
+<div class="max-w-4xl mx-auto p-8">
+
+<h1 class="text-3xl font-bold mb-6">Maak je spelersprofiel</h1>
+
+<div class="grid md:grid-cols-2 gap-4">
+
+<input id="name" class="p-3 rounded text-black" placeholder="Naam">
+<input id="age" class="p-3 rounded text-black" placeholder="Leeftijd">
+<input id="position" class="p-3 rounded text-black" placeholder="Positie">
+<input id="club" class="p-3 rounded text-black" placeholder="Club">
+<input id="height" class="p-3 rounded text-black" placeholder="Lengte">
+<input id="weight" class="p-3 rounded text-black" placeholder="Gewicht">
+<input id="foot" class="p-3 rounded text-black" placeholder="Sterke voet">
+<input id="video" class="p-3 rounded text-black" placeholder="YouTube video link">
+
+</div>
+
+<textarea id="bio" class="p-3 rounded text-black w-full mt-4" placeholder="Korte spelersbeschrijving"></textarea>
+<textarea id="strengths" class="p-3 rounded text-black w-full mt-4" placeholder="Sterke punten"></textarea>
+
+<button onclick="generate()" class="bg-green-500 mt-6 px-6 py-3 rounded font-bold">
+Genereer CV
+</button>
+
+<div id="preview" class="hidden mt-12">
+
+<div id="cv" class="bg-white text-black p-10 rounded">
+
+<h2 id="cvName" class="text-3xl font-bold mb-4"></h2>
+
+<div class="grid grid-cols-2 gap-4 mb-6">
+
+<p><b>Leeftijd:</b> <span id="cvAge"></span></p>
+<p><b>Positie:</b> <span id="cvPosition"></span></p>
+<p><b>Club:</b> <span id="cvClub"></span></p>
+<p><b>Lengte:</b> <span id="cvHeight"></span></p>
+<p><b>Gewicht:</b> <span id="cvWeight"></span></p>
+<p><b>Sterke voet:</b> <span id="cvFoot"></span></p>
+
+</div>
+
+<h3 class="font-bold text-xl">Spelersprofiel</h3>
+<p id="cvBio" class="mb-4"></p>
+
+<h3 class="font-bold text-xl">Sterke punten</h3>
+<p id="cvStrengths"></p>
+
+<p class="mt-6"><b>Video:</b> <span id="cvVideo"></span></p>
+
+</div>
+
+<button onclick="downloadPDF()" class="bg-blue-600 mt-6 px-6 py-3 rounded font-bold">
+Download PDF
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function generate(){
+
+preview.classList.remove("hidden")
+
+cvName.innerText=name.value
+cvAge.innerText=age.value
+cvPosition.innerText=position.value
+cvClub.innerText=club.value
+cvHeight.innerText=height.value+" cm"
+cvWeight.innerText=weight.value+" kg"
+cvFoot.innerText=foot.value
+cvBio.innerText=bio.value
+cvStrengths.innerText=strengths.value
+cvVideo.innerText=video.value
+
+window.scrollTo(0,document.body.scrollHeight)
+
+}
+
+function downloadPDF(){
+
+let element=document.getElementById("cv")
+
+html2pdf().from(element).save("player-cv.pdf")
+
+}
+
+</script>
+
+</body>
+</html>
